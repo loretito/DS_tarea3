@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --Repo, cretidos a esta persona
 https://github.com/suhothayan/hadoop-spark-pig-hive?tab=readme-ov-file
 
@@ -73,3 +74,12 @@ To copy and execute a Pig script for exploratory data analysis, follow these ste
 ## Notes
 
 - Hay que cambiar el .pig, el codigo que subi esta malo no funciona pipipi
+=======
+
+
+cd pig
+
+```bash 
+docker build -t my-pig:latest .
+```
+>>>>>>> 3e27ee5fea5dbeded032906aba6a5c241bca60e4
