@@ -1,22 +1,3 @@
-<<<<<<< HEAD
---Repo, cretidos a esta persona
-https://github.com/suhothayan/hadoop-spark-pig-hive?tab=readme-ov-file
-
---Docker run del container
-docker run -it --name my-hadoop-container -p 50070:50070 -p 8089:8088 -p 8080:8080 --memory="5g" --memory-swap="6g" --cpus="4" suhothayan/hadoop-spark-pig-hive:2.9.2 bash
-
---Copiar el dataset
-docker cp <dataset_path> my-hadoop-container:/home/dataset1
-
---Crear un directorio en HDFS para almacenar el dataset
-     dfs -mkdir -p /user/hadoop/datasets
-
---Subir el archivo CSV a HDFS
-hdfs dfs -put dataset1 /user/hadoop/datasets/
-
---Copiar pig file para analisis exploratorio -> AQUI HAY Q CAMBIAR EL SCRIPT PQ ESTA MALOOOOOO
-docker cp analisis_exploratorio.pig my-hadoop-container:/home/analisis_exploratorio.pig
-
 # Hadoop, Spark, Pig, Hive Docker Setup
 
 This repository is a Docker setup for Hadoop, Spark, Pig, and Hive, created by [Suhothayan](https://github.com/suhothayan).
@@ -74,12 +55,21 @@ To copy and execute a Pig script for exploratory data analysis, follow these ste
 ## Notes
 
 - Hay que cambiar el .pig, el codigo que subi esta malo no funciona pipipi
-=======
 
+- Repo, cretidos a esta persona
+https://github.com/suhothayan/hadoop-spark-pig-hive?tab=readme-ov-file
 
-cd pig
+- Docker run del container
+docker run -it --name my-hadoop-container -p 50070:50070 -p 8089:8088 -p 8080:8080 --memory="5g" --memory-swap="6g" --cpus="4" suhothayan/hadoop-spark-pig-hive:2.9.2 bash
 
-```bash 
-docker build -t my-pig:latest .
-```
->>>>>>> 3e27ee5fea5dbeded032906aba6a5c241bca60e4
+- Copiar el dataset
+docker cp <dataset_path> my-hadoop-container:/home/dataset1
+
+- Crear un directorio en HDFS para almacenar el dataset
+     dfs -mkdir -p /user/hadoop/datasets
+
+- Subir el archivo CSV a HDFS
+hdfs dfs -put dataset1 /user/hadoop/datasets/
+
+- Copiar pig file para analisis exploratorio -> AQUI HAY Q CAMBIAR EL SCRIPT PQ ESTA MALOOOOOO
+docker cp analisis_exploratorio.pig my-hadoop-container:/home/analisis_exploratorio.pig
