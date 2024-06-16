@@ -1,0 +1,5 @@
+interrupt,1.0
+branch_type,
+indirect_call,1.0
+indirect_jump,1.0
+conditional_jump,0.301074477384962

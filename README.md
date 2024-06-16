@@ -73,3 +73,11 @@ hdfs dfs -put dataset1 /user/hadoop/datasets/
 
 - Copiar pig file para analisis exploratorio -> AQUI HAY Q CAMBIAR EL SCRIPT PQ ESTA MALOOOOOO
 docker cp analisis_exploratorio.pig my-hadoop-container:/home/analisis_exploratorio.pig
+
+hdfs dfs -get /user/hadoop/datasets/average_taken_by_type /home/output/average_taken_by_type
+hdfs dfs -get /user/hadoop/datasets/count_by_type /home/output/count_by_type
+hdfs dfs -get /user/hadoop/datasets/taken_branches /home/output/taken_branches
+
+docker cp my-hadoop-container:/home/output/average_taken_by_type /home/cmunoz/Desktop/U/2024-1/DS/DS_tarea3/output/average_taken_by_type
+docker cp my-hadoop-container:/home/output/count_by_type /home/cmunoz/Desktop/U/2024-1/DS/DS_tarea3/output/count_by_type
+docker cp my-hadoop-container:/home/output/taken_branches /home/cmunoz/Desktop/U/2024-1/DS/DS_tarea3/output/taken_branches
