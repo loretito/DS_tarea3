@@ -1,0 +1,4 @@
+interrupt,1,821
+direct_call,1,3042473
+indirect_call,1,137284
+conditional_jump,0,97014151
