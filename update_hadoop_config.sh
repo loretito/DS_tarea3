@@ -36,7 +36,7 @@ cat <<EOL > "$CORE_SITE_PATH"
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://d7634826ca49:9000</value>
+        <value>hdfs://<container ID>:9000</value>
     </property>
     <property>
         <name>ipc.client.connect.max.retries</name>
@@ -92,6 +92,36 @@ echo ""
 cat <<EOL > "$YARN_SITE_PATH"
 <configuration>
     <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+
+    <property>
+      <name>yarn.application.classpath</name>
+      <value>/usr/local/hadoop/etc/hadoop, /usr/local/hadoop/share/hadoop/common/*, /usr/local/hadoop/share/hadoop/common/lib/*, /usr/local/hadoop/share/hadoop/hdfs/*, /usr/local/hadoop/share/hadoop/hdfs/lib/*, /usr/local/hadoop/share/hadoop/mapreduce/*, /usr/local/hadoop/share/hadoop/mapreduce/lib/*, /usr/local/hadoop/share/hadoop/yarn/*, /usr/local/hadoop/share/hadoop/yarn/lib/*</value>
+    </property>
+
+    <property>
+    <description>
+      Number of seconds after an application finishes before the nodemanager's
+      DeletionService will delete the application's localized file directory
+      and log directory.
+
+      To diagnose Yarn application problems, set this property's value large
+      enough (for example, to 600 = 10 minutes) to permit examination of these
+      directories. After changing the property's value, you must restart the
+      nodemanager in order for it to have an effect.
+
+      The roots of Yarn applications' work directories is configurable with
+      the yarn.nodemanager.local-dirs property (see below), and the roots
+      of the Yarn applications' log directories is configurable with the
+      yarn.nodemanager.log-dirs property (see also below).
+    </description>
+    <name>yarn.nodemanager.delete.debug-delay-sec</name>
+    <value>600</value>
+    </property>
+    
+    <property>
         <name>yarn.nodemanager.resource.memory-mb</name>
         <value>30720</value> <!-- 30 GB en MB -->
     </property>
@@ -130,6 +160,10 @@ echo ""
 # Update mapred-site.xml with the new properties
 cat <<EOL > "$MAPRED_SITE_PATH"
 <configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
     <property>
         <name>mapreduce.map.memory.mb</name>
         <value>30720</value> <!-- 30 GB en MB -->
