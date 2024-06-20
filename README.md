@@ -1,4 +1,3 @@
-
 # Hadoop, Spark, Pig, Hive Docker Setup
 
 This repository is a Docker setup for Hadoop, Spark, Pig, and Hive, created by [Suhothayan](https://github.com/suhothayan).
@@ -18,6 +17,7 @@ docker run -it --name my-hadoop-container --memory 30g -p 50070:50070 -p 8089:80
 ```
 
 Restart the container and open a bash:
+
 ```sh
 docker exec -it my-hadoop-container /bin/bash
 ```
@@ -47,6 +47,7 @@ Replace `<dataset_path>` with the path to your dataset.
     ```
 
 3. **Check the file:**
+
     ```sh
     hdfs dfs -ls /user/hadoop/datasets/
     ```
@@ -60,7 +61,8 @@ To copy and execute a Pig script for exploratory data analysis, follow these ste
     ```sh
     docker cp analisis.pig my-hadoop-container:/home/
     ```
-    Replace `<pig_script_path>` with your preference path.
+
+    Replace `<pig_script_path>` with your preferred path.
 
 2. **Run the Pig Script:**
 
@@ -92,63 +94,63 @@ hive
 
 If you encounter connection issues with Pig and the Hadoop Job Server, follow these steps:
 
-1. Navigate to the Hadoop configuration directory:
+1. Find the container ID:
+
     ```sh
-    cd /usr/local/hadoop/etc/hadoop/
+    docker ps
     ```
 
-2. Edit `core-site.xml`:
-    ```sh
-    vim core-site.xml
-    ```
+2. Modify `update_hadoop.sh` with your container ID on line 27:
 
-3. Add the following properties:
     ```xml
-    <property>
-        <name>ipc.client.connect.max.retries</name>
-        <value>1</value>
-    </property>
-    <property>
-        <name>ipc.client.connect.retry.interval</name>
-        <value>1000</value>
-    </property>
-    <property>
-        <name>ipc.client.connect.max.retries.on.timeouts</name>
-        <value>1</value>
-    </property>
-    <property>
-        <name>ipc.client.connect.timeout</name>
-        <value>2000</value>
-    </property>
-    <!-- Optionally, you can disable retries completely -->
-    <property>
-        <name>ipc.client.connect.max.retries</name>
-        <value>0</value>
-    </property>
-    <property>
-        <name>ipc.client.connect.max.retries.on.timeouts</name>
-        <value>0</value>
-    </property>
+    <value>hdfs://<containerID>:9000</value>
     ```
 
-4. Restart Hadoop services:
+3. Change permissions:
+
     ```sh
-    /usr/local/hadoop/sbin/stop-dfs.sh
-    /usr/local/hadoop/sbin/start-dfs.sh
+    chmod +x update_hadoop.sh
     ```
 
-5. Run Pig with the following command:
+4. Run the script:
+
     ```sh
-    pig -x mapreduce -P pig.properties analisis.pig
+    ./update_hadoop.sh
     ```
+
+5. Run the Pig script.
 
 ## Additional Notes
 
 - If Hive is not working, restart the container.
 - For automated queries, make the script executable and run it:
+
     ```sh
     chmod +x automate_sampling.sh
     ./automate_sampling.sh
     ```
+
   Make sure to copy the `.sh` file from the host machine to the container.
 
+- To increase RAM allocation:
+
+    1. Find the container ID:
+
+        ```sh
+        docker ps
+        ```
+
+    2. Modify `update_hadoop_config.sh` with your container ID on line 35:
+
+        ```xml
+        <value>hdfs://<containerID>:9000</value>
+        ```
+
+    3. Change permissions and run the script:
+
+        ```sh
+        chmod +x update_hadoop_config.sh
+        ./update_hadoop_config.sh
+        ```
+
+4. Run the Pig script.
