@@ -8,6 +8,7 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE;
 
+--0
 LOAD DATA INPATH '/user/hadoop/datasets/dataset1.csv' INTO TABLE branches;
 
 --1. Obtener estadísticas básicas
