@@ -181,9 +181,9 @@ hive
 
     3. Copy `update_hadoop_config.sh` to your container:
 
-      ```sh
-      docker cp update_hadoop_config.sh <container ID>:/home/
-      ```
+        ```sh
+        docker cp update_hadoop_config.sh <container ID>:/home/
+        ```
 
     4. Change permissions and run the script:
 
