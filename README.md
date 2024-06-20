@@ -52,9 +52,9 @@ Replace `<dataset_path>` with the path to your dataset.
     hdfs dfs -ls /user/hadoop/datasets/
     ```
 
-## Pig Script for Exploratory Analysis
+## Pig 
 
-To copy and execute a Pig script for exploratory data analysis, follow these steps:
+To copy and execute a Pig script for data analysis, follow these steps:
 
 1. **Copy the Pig Script to the Container:**
 
@@ -69,26 +69,8 @@ To copy and execute a Pig script for exploratory data analysis, follow these ste
     Inside the container, navigate to the home directory and run the Pig script:
 
     ```sh
-    pig analisis_exploratorio.pig
+    pig analisis.pig
     ```
-
-## Retrieving Output from Container to Local Machine
-
-Inside the container, navigate to the home directory and run:
-
-```sh
-docker cp my-hadoop-container:/home/output <local_path>
-```
-
-Replace `<local_path>` with your preferred path.
-
-## Hive
-
-Run the next command to start Hive:
-
-```sh
-hive
-```
 
 ## Troubleshooting
 
@@ -114,21 +96,66 @@ docker cp update_hadoop.sh <container ID>:/home/
 
 4. Change permissions:
 
-    ```sh
+```sh
     chmod +x update_hadoop.sh
-    ```
+```
 
 5. Run the script:
 
-    ```sh
+```sh
     ./update_hadoop.sh
-    ```
+```
 
 6. Run the Pig script.
 
+## Retrieving Output from Container to Local Machine
+
+Inside the container, navigate to the home directory and run:
+
+```sh
+docker cp my-hadoop-container:/home/output <local_path>
+```
+
+Replace `<local_path>` with your preferred path.
+
+## Hive
+
+Run the next command to start Hive:
+
+```sh
+hive
+```
+
+## Hive
+
+1. Copy from your local machine the hive_config.sh file to the container:
+
+```sh
+    docker cp hive_config.sh my-hadoop-container:/home/
+```
+2. Change permissions:
+
+```sh
+    chmod +x hive_config.sh
+```
+3. Run the script: 
+
+## For geographic area enter 2 and for time zone enter 106 when prompted
+
+```sh
+    ./hive_config.sh
+```
+
+4. Start Hive:
+
+```sh
+    hive
+```
+
+5. Run or copy the Hive script.
+
 ## Additional Notes
 
-- If Hive is not working, restart the container.
 - For automated queries, make the script executable and run it:
 
     ```sh
