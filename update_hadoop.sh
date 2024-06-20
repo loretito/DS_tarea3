@@ -9,6 +9,7 @@ if [ ! -f "$CORE_SITE_PATH" ]; then
     exit 1
 fi
 echo "core-site.xml found."
+echo ""
 
 # Backup core-site.xml
 cp "$CORE_SITE_PATH" "$CORE_SITE_PATH.bak"
@@ -18,6 +19,7 @@ else
     echo "Failed to create backup of core-site.xml."
     exit 1
 fi
+echo ""
 
 # Update core-site.xml with the new properties
 cat <<EOL > "$CORE_SITE_PATH"
@@ -60,6 +62,8 @@ else
     echo "Failed to update core-site.xml."
     exit 1
 fi
+echo ""
+
 
 # Restart Hadoop services
 /usr/local/hadoop/sbin/stop-dfs.sh
@@ -69,6 +73,8 @@ else
     echo "Failed to stop Hadoop DFS."
     exit 1
 fi
+echo ""
+
 
 /usr/local/hadoop/sbin/start-dfs.sh
 if [ $? -eq 0 ]; then
@@ -77,5 +83,6 @@ else
     echo "Failed to start Hadoop DFS."
     exit 1
 fi
+echo ""
 
 echo "Hadoop services restarted successfully."

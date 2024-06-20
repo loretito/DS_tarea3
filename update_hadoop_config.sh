@@ -14,6 +14,8 @@ check_file_exists() {
         echo "$1 found."
     fi
 }
+echo ""
+
 
 # Check if core-site.xml exists
 check_file_exists "$CORE_SITE_PATH"
@@ -26,6 +28,8 @@ else
     echo "Failed to create backup of core-site.xml."
     exit 1
 fi
+echo ""
+
 
 # Update core-site.xml with the new properties
 cat <<EOL > "$CORE_SITE_PATH"
@@ -68,6 +72,8 @@ else
     echo "Failed to update core-site.xml."
     exit 1
 fi
+echo ""
+
 
 # Check if yarn-site.xml exists
 check_file_exists "$YARN_SITE_PATH"
@@ -80,6 +86,7 @@ else
     echo "Failed to create backup of yarn-site.xml."
     exit 1
 fi
+echo ""
 
 # Update yarn-site.xml with the new properties
 cat <<EOL > "$YARN_SITE_PATH"
@@ -105,6 +112,7 @@ else
     echo "Failed to update yarn-site.xml."
     exit 1
 fi
+echo ""
 
 # Check if mapred-site.xml exists
 check_file_exists "$MAPRED_SITE_PATH"
@@ -117,6 +125,7 @@ else
     echo "Failed to create backup of mapred-site.xml."
     exit 1
 fi
+echo ""
 
 # Update mapred-site.xml with the new properties
 cat <<EOL > "$MAPRED_SITE_PATH"
@@ -150,6 +159,7 @@ else
     echo "Failed to update mapred-site.xml."
     exit 1
 fi
+echo ""
 
 # Restart Hadoop services
 /usr/local/hadoop/sbin/stop-dfs.sh
@@ -159,6 +169,7 @@ else
     echo "Failed to stop Hadoop DFS."
     exit 1
 fi
+echo ""
 
 /usr/local/hadoop/sbin/stop-yarn.sh
 if [ $? -eq 0 ]; then
@@ -167,6 +178,7 @@ else
     echo "Failed to stop Hadoop YARN."
     exit 1
 fi
+echo ""
 
 /usr/local/hadoop/sbin/start-dfs.sh
 if [ $? -eq 0 ]; then
@@ -175,6 +187,7 @@ else
     echo "Failed to start Hadoop DFS."
     exit 1
 fi
+echo ""
 
 /usr/local/hadoop/sbin/start-yarn.sh
 if [ $? -eq 0 ]; then
@@ -183,5 +196,6 @@ else
     echo "Failed to start Hadoop YARN."
     exit 1
 fi
+echo ""
 
 echo "Hadoop services restarted successfully."

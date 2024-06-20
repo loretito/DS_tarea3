@@ -106,19 +106,25 @@ If you encounter connection issues with Pig and the Hadoop Job Server, follow th
     <value>hdfs://<containerID>:9000</value>
     ```
 
-3. Change permissions:
+3. Copy `update_hadoop.sh` to your container:
+
+```sh
+docker cp update_hadoop.sh <container ID>:/home/
+```
+
+4. Change permissions:
 
     ```sh
     chmod +x update_hadoop.sh
     ```
 
-4. Run the script:
+5. Run the script:
 
     ```sh
     ./update_hadoop.sh
     ```
 
-5. Run the Pig script.
+6. Run the Pig script.
 
 ## Additional Notes
 
@@ -146,11 +152,17 @@ If you encounter connection issues with Pig and the Hadoop Job Server, follow th
         <value>hdfs://<containerID>:9000</value>
         ```
 
-    3. Change permissions and run the script:
+    3. Copy `update_hadoop_config.sh` to your container:
+
+      ```sh
+      docker cp update_hadoop_config.sh <container ID>:/home/
+      ```
+
+    4. Change permissions and run the script:
 
         ```sh
         chmod +x update_hadoop_config.sh
         ./update_hadoop_config.sh
         ```
 
-4. Run the Pig script.
+5. Run the Pig script.
