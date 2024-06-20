@@ -13,7 +13,7 @@ docker pull suhothayan/hadoop-spark-pig-hive:2.9.2
 To run the container with Hadoop, Spark, Pig, and Hive, use the following command:
 
 ```sh
-docker run -it --name my-hadoop-container --memory 30g -p 50070:50070 -p 8089:8088 -p 8080:8080 suhothayan/hadoop-spark-pig-hive:2.9.2 bash
+docker run -it --name my-hadoop-container --memory 30g -v /data/hadoop:/data -p 50070:50070 -p 8089:8088 -p 8080:8080 suhothayan/hadoop-spark-pig-hive:2.9.2 bash
 ```
 
 Restart the container and open a bash:
